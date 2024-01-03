@@ -9,6 +9,11 @@
   text-align: center;
 }
 
+h1 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
 .pagination-icons {
   @apply flex justify-center items-center h-10 border-2 w-10 rounded-full;
 }

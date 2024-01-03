@@ -1,8 +1,6 @@
+import { VideoDto } from "../VideoCatalog/models";
+
 export type VideoCardPropsType = {
-  author: string;
-  id: number;
-  release_date: string;
-  title: string;
-  url: string;
+  video: VideoDto;
   onOpen: (id: number) => void;
 };

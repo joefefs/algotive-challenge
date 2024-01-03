@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import CloseIcon from "../../assets/icons/closeIcon";
-import { API_URL, fromatDate } from "../../utils";
+import { fromatDate } from "../../utils";
 import { VideoDto } from "../VideoCatalog/models";
 import { VideoViewerPropTypes, VideoViewerRefType } from "./models";
 
@@ -16,21 +16,20 @@ export default forwardRef<VideoViewerRefType, VideoViewerPropTypes>(
     ref: Ref<VideoViewerRefType>
   ): ReactElement {
     const [open, setOpen] = useState(false);
-    const [videoData, setVideoData] = useState<VideoDto | null>(null);
+    const [video, setVideo] = useState<VideoDto | null>(null);
 
     useImperativeHandle(ref, () => ({
-      open: async (id) => {
+      open: async (videoData) => {
         setOpen(true);
-
-        const response = await fetch(`${API_URL}/${id}`);
-        const result = await response.json();
-        setVideoData(result);
+        setVideo(videoData);
       },
       close: () => {
-        setVideoData(null);
+        setVideo(null);
         setOpen(false);
       },
     }));
+
+    console.log(video);
 
     return (
       <>
@@ -41,7 +40,7 @@ export default forwardRef<VideoViewerRefType, VideoViewerPropTypes>(
                 <CloseIcon />
               </button>
               <h1 className="self-start">
-                {videoData?.title} - {videoData?.author}
+                {video?.title} - {video?.author}
               </h1>
 
               <div className="w-full">
@@ -49,16 +48,16 @@ export default forwardRef<VideoViewerRefType, VideoViewerPropTypes>(
                   width={600}
                   height={400}
                   allowFullScreen
-                  src={`${videoData?.url}?autoplay=1`}
+                  src={`${video?.url}?autoplay=1`}
                 />
               </div>
               <div className="self-start text-left">
                 <p className="font-bold">Description</p>
-                <p>{videoData?.description}</p>
+                <p>{video?.description}</p>
               </div>
               <div className="self-start text-left">
                 <p className="font-bold">Released on</p>
-                <p>{fromatDate(videoData?.release_date || "")}</p>
+                <p>{fromatDate(video?.release_date || "")}</p>
               </div>
             </div>
           </div>

@@ -1,8 +1,10 @@
+import { VideoDto } from "../VideoCatalog/models";
+
 export type VideoViewerPropTypes = {
   onClose: () => void;
 };
 
 export type VideoViewerRefType = {
-  open: (id: number) => void;
+  open: (video: VideoDto) => void;
   close: () => void;
 };
