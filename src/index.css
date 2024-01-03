@@ -17,3 +17,15 @@ h1 {
 .pagination-icons {
   @apply flex justify-center items-center h-10 border-2 w-10 rounded-full;
 }
+
+.card-container {
+  @apply flex flex-col space-y-6 py-10 my-8 items-center border-2 rounded-2xl shadow-lg shadow-slate-100 overflow-hidden md:py-0 md:h-[92px] md:grid md:grid-cols-[120px_2fr_2fr_1fr_1fr] md:justify-items-center md:space-y-0 hover:scale-[1.02] ease-in-out duration-300;
+}
+
+button {
+  @apply hover:bg-sky-200;
+}
+
+button:disabled {
+  @apply hover:bg-white;
+}

@@ -29,24 +29,23 @@ export default forwardRef<VideoViewerRefType, VideoViewerPropTypes>(
       },
     }));
 
-    console.log(video);
-
     return (
       <>
         {open && (
           <div className="fixed w-full h-full bg-slate-300/50 top-0 left-0 flex justify-center items-center">
             <div className="p-10 w-4/5 border-4 bg-white rounded-2xl flex flex-col space-y-4 items-center">
-              <button className="self-end" onClick={onClose}>
+              <button className="self-end rounded-full" onClick={onClose}>
                 <CloseIcon />
               </button>
               <h1 className="self-start">
                 {video?.title} - {video?.author}
               </h1>
 
-              <div className="w-full">
+              <div className="w-full pt-[56.25%] h-0 relative">
                 <iframe
-                  width={600}
-                  height={400}
+                  className="absolute left-0 top-0 h-100 w-100"
+                  width={"100%"}
+                  height={"100%"}
                   allowFullScreen
                   src={`${video?.url}?autoplay=1`}
                 />
@@ -59,6 +58,11 @@ export default forwardRef<VideoViewerRefType, VideoViewerPropTypes>(
                 <p className="font-bold">Released on</p>
                 <p>{fromatDate(video?.release_date || "")}</p>
               </div>
+              <button
+                onClick={onClose}
+                className="self-center w-auto border-2 p-2 rounded-xl bg-sky-100">
+                Close
+              </button>
             </div>
           </div>
         )}

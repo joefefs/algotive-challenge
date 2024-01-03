@@ -2,61 +2,38 @@ import { ReactElement, useEffect, useRef, useState } from "react";
 import { useLoader } from "../../context";
 import ChevronLeft from "../../assets/icons/chevronLeft";
 import ChevronRight from "../../assets/icons/chevronRight";
-import { API_URL } from "../../utils";
+import { getAllVideos, PAGINATION_INITIAL_VALUES } from "../../utils";
 import VideoCard from "../VideoCard";
 import VideoViewer from "../VideoViewer";
 import { VideoViewerRefType } from "../VideoViewer/models";
 import { PaginationType, VideoDto } from "./models";
 
-// TODO - make responsive
 export default function VideoCatalog(): ReactElement {
   const [data, setData] = useState<VideoDto[]>([]);
   const [page, setPage] = useState<number>(1);
-  const [pagination, setPagination] = useState<PaginationType>({
-    count: 0,
-    next: null,
-    previous: null,
-    pages: [],
-  });
+  const [pagination, setPagination] = useState<PaginationType>(
+    PAGINATION_INITIAL_VALUES
+  );
 
   const { setLoading, setOpenError, setErrorMessage } = useLoader();
 
-  console.log(data[0]);
   const videoViewer = useRef<VideoViewerRefType>(null);
 
-  async function getAllVideos(currentPage = 1): Promise<void> {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `${API_URL}/${currentPage > 1 ? `?page=${currentPage}` : ""}`
-      );
-      console.log(response);
-      if (response.ok) {
-        const result = await response.json();
-        setData(result.results);
-        const pages = new Array(result.count / result.results.length)
-          .fill(null)
-          .map((_, index) => index + 1);
-        setPagination({
-          count: result.count,
-          next: result.next ? result.next.split("page=") : null,
-          previous: result.previous ? result.previous.split("page=") : 1,
-          pages,
-        });
-      } else {
-        setOpenError(true);
-        setErrorMessage(
-          `Oops, there was an error: ${response.status} - ${response.statusText}`
-        );
-      }
-    } catch (e) {
-      setOpenError(true);
-      console.error(e);
-    }
-    setLoading(false);
-  }
   useEffect(() => {
-    getAllVideos(page);
+    setLoading(true);
+    getAllVideos(page)
+      .then(({ error, pagination, data }) => {
+        if (error) {
+          setOpenError(true);
+          setErrorMessage(error);
+        }
+        setData(data);
+        setPagination(pagination);
+        setLoading(false);
+      })
+      .catch(() => {
+        setOpenError(true);
+      });
   }, [page]);
 
   return (

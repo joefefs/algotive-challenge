@@ -9,12 +9,6 @@ export type VideoDto = {
   url: string;
 };
 
-// export type VideoDto = VideoCardPropsType & {
-//   created_at: string;
-//   description: string;
-//   updated_at: string;
-// };
-
 export type PaginationType = {
   count: number;
   next: string | null;
