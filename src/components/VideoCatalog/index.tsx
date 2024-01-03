@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
-import { useLoader } from "../../assets/context";
+import { useLoader } from "../../context";
 import ChevronLeft from "../../assets/icons/chevronLeft";
 import ChevronRight from "../../assets/icons/chevronRight";
 import { API_URL } from "../../utils";

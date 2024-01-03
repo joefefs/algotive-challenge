@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { useLoader } from "../../assets/context";
+import { useLoader } from "../../context";
 import WarningIcon from "../../assets/icons/warningIcon";
 
 export default function ErrorModal(): ReactElement {

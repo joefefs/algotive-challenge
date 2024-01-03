@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { CircularProgress } from "@mui/material";
-import { useLoader } from "../../assets/context";
+import { useLoader } from "../../context";
 
 export default function Loader(): ReactElement {
   const { loading } = useLoader();
