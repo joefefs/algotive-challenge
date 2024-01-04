@@ -46,3 +46,5 @@ Once the installation is done, run the project:
 `npm run dev`
 
 This will run the App on [http://localhost:5173](http://localhost:5173), which can now be visited in the browser.
+
+**NOTE:** To test error handling, you can either change the API url, or stop running the Docker image to get a 500 error.

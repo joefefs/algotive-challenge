@@ -10,6 +10,7 @@ export default function VideoCard({ video, onOpen }: VideoCardPropsType) {
   const thumbnail = `https://img.youtube.com/vi/${
     url.split("/embed/")[1].split("?")[0]
   }/hqdefault.jpg`;
+
   return (
     <>
       <div className="card-container">
