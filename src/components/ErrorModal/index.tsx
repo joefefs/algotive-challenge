@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import { useLoader } from "../../context";
 import WarningIcon from "../../assets/icons/warningIcon";
 
+// Component
 export default function ErrorModal(): ReactElement {
   const { errorMessage, openError, setOpenError } = useLoader();
 

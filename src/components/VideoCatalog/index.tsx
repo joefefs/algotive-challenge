@@ -8,6 +8,7 @@ import VideoViewer from "../VideoViewer";
 import { VideoViewerRefType } from "../VideoViewer/models";
 import { PaginationType, VideoDto } from "./models";
 
+// Component
 export default function VideoCatalog(): ReactElement {
   const [data, setData] = useState<VideoDto[]>([]);
   const [page, setPage] = useState<number>(1);
@@ -39,6 +40,18 @@ export default function VideoCatalog(): ReactElement {
   return (
     <>
       <h1>Video Catalog</h1>
+      <div className="hidden font-bold mt-10 items-center md:py-0 md:grid md:grid-cols-[120px_2fr_2fr_1fr_1fr] md:justify-items-center mb-2">
+        <div />
+        <div className="w-full">
+          <p className="px-4 md:border-r-2">Title</p>
+        </div>
+        <div className="w-full">
+          <p className="px-4 md:border-r-2">Artist</p>
+        </div>
+        <div className="w-full">
+          <p className="px-4">Release Date</p>
+        </div>
+      </div>
       {data.map((video) => (
         <VideoCard
           key={video.id}

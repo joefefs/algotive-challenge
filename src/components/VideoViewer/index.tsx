@@ -10,6 +10,7 @@ import { fromatDate } from "../../utils";
 import { VideoDto } from "../VideoCatalog/models";
 import { VideoViewerPropTypes, VideoViewerRefType } from "./models";
 
+// Component
 export default forwardRef<VideoViewerRefType, VideoViewerPropTypes>(
   function VideoViewer(
     { onClose }: VideoViewerPropTypes,
@@ -18,6 +19,8 @@ export default forwardRef<VideoViewerRefType, VideoViewerPropTypes>(
     const [open, setOpen] = useState(false);
     const [video, setVideo] = useState<VideoDto | null>(null);
 
+    /* Uses imperative handle to access custom methods from the parent through a ref.
+    This helps avoid passing props, and keeping display logic on the Child Component */
     useImperativeHandle(ref, () => ({
       open: async (videoData) => {
         setOpen(true);
@@ -33,7 +36,7 @@ export default forwardRef<VideoViewerRefType, VideoViewerPropTypes>(
       <>
         {open && (
           <div className="fixed w-full h-full bg-slate-300/50 top-0 left-0 flex justify-center items-center">
-            <div className="p-10 w-4/5 border-4 bg-white rounded-2xl flex flex-col space-y-4 items-center">
+            <div className="p-6 w-[92%] border-4 bg-white rounded-2xl flex flex-col space-y-4 items-center md:w-[50%] md:p-10">
               <button className="self-end rounded-full" onClick={onClose}>
                 <CloseIcon />
               </button>

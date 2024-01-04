@@ -20,6 +20,7 @@ const LoaderContext = createContext<LoadingContextType>(
   {} as LoadingContextType
 );
 
+// Provider for loading and error handling Context
 export function LoaderContextProvider({
   children,
 }: {
@@ -44,6 +45,6 @@ export function LoaderContextProvider({
   );
 }
 
-// eslint-disable-next-line
+// Hook to access the Context
 export const useLoader = (): LoadingContextType =>
   useContext<LoadingContextType>(LoaderContext);

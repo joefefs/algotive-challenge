@@ -15,6 +15,7 @@ The app consists of a Single Page App that fetches data (music videos) from the 
 3. **VideoViewer** - A popup that renders some info on the video as well as an embeded YouTube player for playing it.
 4. **ModalError** - A popup to display errors when something goes wrong while consuming the API.
 5. **Loader** - Displays briefly when resolving the request made to the server. It uses CircularProgress component from MUI library.
+6. **Icons** - JSX for svg icons are from HeroIcons (Tailwinds icon library)
 
 ### Context:
 

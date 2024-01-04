@@ -4,6 +4,7 @@ import Loader from "./components/Loader";
 
 import VideoCatalog from "./components/VideoCatalog";
 
+// Main component
 function App(): ReactElement {
   return (
     <>

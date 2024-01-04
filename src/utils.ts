@@ -2,6 +2,7 @@ export const API_URL = "/api/v1/videos";
 import moment from "moment";
 import { PaginationType, VideoDto } from "./components/VideoCatalog/models";
 
+// Format date (using moment.js) helper
 export function fromatDate(dateString: string): string {
   const date = new Date(dateString);
   return moment(date).utc().format("MMM Do YYYY");
@@ -14,13 +15,21 @@ export const PAGINATION_INITIAL_VALUES = {
   pages: [],
 };
 
+type GetVideosResponseType = {
+  data: VideoDto[];
+  pagination: PaginationType;
+  error: string;
+};
+
+// Get Paginated list of Videos from the API
 export async function getAllVideos(
-  currentPage = 1
-): Promise<{ data: VideoDto[]; pagination: PaginationType; error: string }> {
+  currentPage: number = 1
+): Promise<GetVideosResponseType> {
   try {
     const response = await fetch(
       `${API_URL}/${currentPage > 1 ? `?page=${currentPage}` : ""}`
     );
+    // If error, return error message to display
     if (!response.ok)
       return {
         data: [],
@@ -32,6 +41,7 @@ export async function getAllVideos(
       .fill(null)
       .map((_, index) => index + 1);
 
+    // Return the list of videos as well as the pagination data
     return {
       data: result.results,
       pagination: {
@@ -43,7 +53,11 @@ export async function getAllVideos(
       error: "",
     };
   } catch (e) {
-    console.log(e);
-    return { error: "", data: [], pagination: PAGINATION_INITIAL_VALUES };
+    // Returns generic error message for other errors (like in parsing the JSON response)
+    return {
+      error: "Oops, there was an error!",
+      data: [],
+      pagination: PAGINATION_INITIAL_VALUES,
+    };
   }
 }
